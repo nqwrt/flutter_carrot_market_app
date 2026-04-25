@@ -18,7 +18,8 @@ samples, guidance on mobile development, and a full API reference.
 
 https://parkjh7764.tistory.com/entry/Flutter-%EB%B0%B0%EC%B9%98-%EC%9C%84%EC%A0%AF-Row-Column-Flexible-%EC%9C%84%EC%A0%AF-Expanded-%EC%9C%84%EC%A0%AF-Stack-%EC%9C%84%EC%A0%AF
 https://github.com/sudar-life/flutter_carrot_market
-https://www.youtube.com/watch?v=89myhI2yKK8&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=2
+
+https://www.youtube.com/watch?v=fwzO5QD5Djc&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=5
 
 https://github.com/tyeom/flutter_carrot_market
 
