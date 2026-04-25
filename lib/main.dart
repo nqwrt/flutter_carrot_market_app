@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_carrot_market_app/page/home.dart';
+import 'package:flutter_carrot_market_app/page/app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue, //“앱 전체를 파란색 계열로 자동 스타일링해줘”
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Home(),
+      home: const App(),
     );
   }
 }
