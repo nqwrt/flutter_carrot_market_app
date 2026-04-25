@@ -123,70 +123,87 @@ class _HomeState extends State<Home> {
   }
 
   Widget _bodyWidget() {
-    return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      itemBuilder: (BuildContext _context, int index) {
-        print("====== " + index.toString());
-        return Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: Image.asset(
-                    datas[index]["image"].toString(),
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start, //end 도 연습
-                      children: [
-                        Text(
-                          datas[index]["title"].toString(),
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 15)
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                            datas[index]["location"].toString(),
-                            style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.3)),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                            calStringToWon(datas[index]["price"].toString()),
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SvgPicture.asset(
-                                  "assets/svg/heart_off.svg",
-                                  width: 13,
-                                  height: 13
-                              ),
-                              SizedBox(width: 5,),//사이간격 띄우기
-                              Text(datas[index]["likes"].toString()),
-                            ],
-                          ),
-                        ),
-                      ],
+
+    switch(_currentPageIndex){
+      case 0:
+        //print("이걸 타나");
+        return ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          itemBuilder: (BuildContext _context, int index) {
+            //print("이것은 ====== " + index.toString());
+            return Container(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: Image.asset(
+                        datas[index]["image"].toString(),
+                        width: 100,
+                        height: 100,
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            )
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start, //end 도 연습
+                          children: [
+                            Text(
+                                datas[index]["title"].toString(),
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontSize: 15)
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              datas[index]["location"].toString(),
+                              style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.3)),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              calStringToWon(datas[index]["price"].toString()),
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/svg/heart_off.svg",
+                                      width: 13,
+                                      height: 13
+                                  ),
+                                  SizedBox(width: 5,),//사이간격 띄우기
+                                  Text(datas[index]["likes"].toString()),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+            );
+          },
+          itemCount: datas.length,
+          separatorBuilder: (BuildContext _context, int index) {
+            return Container(height: 1, color: Colors.black);
+          },
         );
-      },
-      itemCount: datas.length,
-      separatorBuilder: (BuildContext _context, int index) {
-        return Container(height: 1, color: Colors.black);
-      },
-    );
+        break;
+      case 1:
+        return Container();
+      case 2:
+        return Container();
+      case 3:
+        return Container();
+      case 4:
+        return Container();
+      case 5:
+        return Container();
+    }
+    return Container();
   }
 
   BottomNavigationBarItem _bottomNavigationBarItem(String iconName, String label){
@@ -219,32 +236,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  // Widget _bottomNavigationBarWidget(){
-  //   return BottomNavigationBar(
-  //     items: [
-  //       BottomNavigationBarItem(
-  //         icon: SvgPicture.asset("assets/svg/home_off.svg",width: 22),
-  //         label: "홈"
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: SvgPicture.asset("assets/svg/notes_off.svg",width: 22),
-  //         label: "동네생활",
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: SvgPicture.asset("assets/svg/location_off.svg",width: 22),
-  //         label: "내근처",
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: SvgPicture.asset("assets/svg/chat_off.svg",width: 22),
-  //         label: "채팅",
-  //       ),
-  //       BottomNavigationBarItem(
-  //         icon: SvgPicture.asset("assets/svg/user_off.svg",width: 22),
-  //         label: "나의 당근",
-  //       ),
-  //     ],
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +247,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-//https://www.youtube.com/watch?v=o_8t9zgc2sA&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=4
+//https://www.youtube.com/watch?v=fwzO5QD5Djc&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=5
 
 //깃허브 올리기
 //https://lamlic36.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EA%B9%83-%ED%97%88%EB%B8%8C-%EC%97%B0%EB%8F%99-4-%EA%B9%83%EC%97%90-%EB%82%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%98%AC%EB%A6%AC%EA%B8%B0
