@@ -86,7 +86,7 @@ class _AppState extends State<App> {
   }
 }
 
-//https://www.youtube.com/watch?v=fwzO5QD5Djc&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=5
+//https://www.youtube.com/watch?v=sDXmGvzzf-E&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=6
 
 //깃허브 참고
 //https://github.com/sudar-life/flutter_carrot_market/blob/feature/data-load/lib/pages/app.dart
