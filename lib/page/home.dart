@@ -92,10 +92,96 @@ class _HomeState extends State<Home> {
     return contentsRepository.loadContentsFromLocation(currentLocation);
   }
 
+  _makeDataList(List<Map<String,String>> datas){
+      return ListView.separated(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      itemBuilder: (BuildContext _context, int index) {
+        //print("이것은 ====== " + index.toString());
+        return Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Image.asset(
+                    datas[index]["image"].toString(),
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start, //end 도 연습
+                      children: [
+                        Text(
+                            datas[index]["title"].toString(),
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 15)
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          datas[index]["location"].toString(),
+                          style: TextStyle(fontSize: 12, color: Colors.black
+                              .withOpacity(0.3)),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          calStringToWon(datas[index]["price"].toString()),
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SvgPicture.asset(
+                                  "assets/svg/heart_off.svg",
+                                  width: 13,
+                                  height: 13
+                              ),
+                              SizedBox(width: 5,), //사이간격 띄우기
+                              Text(datas[index]["likes"].toString()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+        );
+      },
+      itemCount: datas.length,
+      separatorBuilder: (BuildContext _context, int index) {
+        return Container(height: 1, color: Colors.black);
+      },
+    );
+  }
+
   Widget _bodyWidget() {
     return FutureBuilder(
         future: _loadContents(),
         builder: (context, snapshot){
+          //loading 처리
+          if(snapshot.connectionState != ConnectionState.done){
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if(snapshot.hasError ){
+            return Center(child: Text("로딩중 데이터가 에러가 발생하였습니다."));
+          }
+
+          if(snapshot.hasError ){
+            return Center(child: Text("로딩중 데이터가 에러가 발생하였습니다."));
+          }
+
+          if(snapshot.hasData){
+            return _makeDataList(snapshot.data as List<Map<String, String>>);
+          }
+
+          return Center(child: Text("데이타 없음"));
           // List<Map<String, String>> datas = snapshot.data;
           List<Map<String, String>> datas = snapshot.data as List<Map<String, String>>;
           return ListView.separated(
