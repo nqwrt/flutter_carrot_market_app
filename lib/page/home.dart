@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carrot_market_app/data/product_data.dart';
+import 'package:flutter_carrot_market_app/page/detail.dart';
 import 'package:flutter_carrot_market_app/repository/contents_repository.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    //contentsRepository = ContentsRepository();
     currentLocation = "ara";
   }
 
@@ -99,61 +99,70 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       itemBuilder: (BuildContext _context, int index) {
         //print("이것은 ====== " + index.toString());
-        return Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: Image.asset(
-                  datas[index]["image"].toString(),
-                  width: 100,
-                  height: 100,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, //end 도 연습
-                    children: [
-                      Text(
-                        datas[index]["title"].toString(),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        datas[index]["location"].toString(),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        calStringToWon(datas[index]["price"].toString()),
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/svg/heart_off.svg",
-                              width: 13,
-                              height: 13,
-                            ),
-                            SizedBox(width: 5), //사이간격 띄우기
-                            Text(datas[index]["likes"].toString()),
-                          ],
-                        ),
-                      ),
-                    ],
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+              return DetailContentView(data:datas[index],
+              );
+            }));
+            print(datas[index]["title"].toString());
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Image.asset(
+                    datas[index]["image"].toString(),
+                    width: 100,
+                    height: 100,
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start, //end 도 연습
+                      children: [
+                        Text(
+                          datas[index]["title"].toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          datas[index]["location"].toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black.withOpacity(0.3),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          calStringToWon(datas[index]["price"].toString()),
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/svg/heart_off.svg",
+                                width: 13,
+                                height: 13,
+                              ),
+                              SizedBox(width: 5), //사이간격 띄우기
+                              Text(datas[index]["likes"].toString()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
