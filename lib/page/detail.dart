@@ -10,8 +10,6 @@ class DetailContentView extends StatefulWidget {
 
 class _DetailContentViewState extends State<DetailContentView> {
 
-  Size? size;
-
   PreferredSizeWidget _appbarWidget(){
     return AppBar(
       backgroundColor: Colors.transparent,
@@ -24,19 +22,23 @@ class _DetailContentViewState extends State<DetailContentView> {
   }
 
   Widget _bodyWidget(){
+    final size = MediaQuery.of(context).size;
+    final tag = widget.data["cid"] ?? widget.data["image"] ?? "default_tag";
+    print("태그"+ tag);
     return Container(
-      child: Image.asset(
-        widget.data["image"].toString(),
-        width: size?.width,
-        fit: BoxFit.fill,
+      child: Hero(
+        tag: tag,
+        child: Image.asset(
+          widget.data["image"].toString(),
+          width: size.width,
+          fit: BoxFit.cover, //이 그러짐 방지
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-
     return Scaffold(
         extendBodyBehindAppBar: true, //치고 올라감
         appBar: _appbarWidget(),
