@@ -52,7 +52,7 @@ class _DetailContentViewState extends State<DetailContentView> {
     final tag = widget.data["cid"] ?? widget.data["image"] ?? "default_tag";
     print("태그" + tag);
     return Container(
-      child: Column(
+      child: Stack(   //Column 을 Statk 으로
         children: [
           Hero(
             tag: tag,
@@ -78,24 +78,29 @@ class _DetailContentViewState extends State<DetailContentView> {
               }).toList(),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.asMap().entries.map((entry) {
-              return GestureDetector(
-                // onTap: () => _controller.animateToPage(entry.key),
-                child: Container(
-                  width: 12.0,
-                  height: 12.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withValues(alpha: _current == entry.key ? 0.9 : 0.4)),
-                ),
-              );
-            }).toList(),
+          Positioned(
+            bottom: 0,
+            left: 0,   // 가운데 정렬
+            right: 0,  // 가운데 정렬
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  // onTap: () => _controller.animateToPage(entry.key),
+                  child: Container(
+                    width: 12.0,
+                    height: 12.0,
+                    margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.1))
+                            .withValues(alpha: _current == entry.key ? 0.9 : 0.4)),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
