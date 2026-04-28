@@ -37,12 +37,22 @@ class _DetailContentViewState extends State<DetailContentView> {
     );
   }
 
+  _bottomBarWidget() {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: 55,
+      color: Colors.red,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true, //치고 올라감
         appBar: _appbarWidget(),
-        body: _bodyWidget()
+        body: _bodyWidget(),
+        bottomNavigationBar: _bottomBarWidget(),
     );
   }
 }
+//https://www.youtube.com/watch?v=c6rwfZBKjp8&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=8
